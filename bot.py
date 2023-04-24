@@ -1,9 +1,7 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
-from table_parsing import get_list_of_employees
-from table_parsing import get_plan_by_employee_number
 import logging
-from print import get_mounth_by_number
+from print import get_mounth_by_number, get_tomorrow_plan
 
 
 
@@ -11,7 +9,8 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-userss = {441488533: 15}
+userss = {441488533: 16}
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
@@ -34,6 +33,8 @@ async def all_month_plan_command(update: Update, context: ContextTypes.DEFAULT_T
 
 async def tomorrow_plan(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send o tomorrow plan"""
+    user_id = update.message.from_user.id
+    await update.message.reply_text(get_tomorrow_plan(userss.get(user_id)))
 
 
 

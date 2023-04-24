@@ -1,4 +1,6 @@
 from table_parsing import *
+from datetime import datetime
+
 
 def print_list_employess(employees_list: list) -> None:
     i = 0
@@ -22,3 +24,20 @@ def get_mounth_by_number(number: int) -> str:
         return repl
     else:
         return "Error: number not in range"
+
+
+def get_tomorrow_plan(number: int) -> str:
+    if 0 < number < 18:
+        file_name = "plan.xlsx"
+        employees_list = get_list_of_employees(file_name)
+        employee_number: list = employees_list.get(list(employees_list.keys())[number])
+        employee_plan = get_plan_by_employee_number(employee_number, file_name)
+        repl = ''
+        shift = employee_plan[datetime.now().day]
+        if shift.is_weekend:
+            repl += "You have a day off tomorrow!"
+        else:
+            repl += "Start: " + shift.start_time + ", end: " + shift.end_time
+        return repl
+    else:
+        return "Somethink wrong..."
