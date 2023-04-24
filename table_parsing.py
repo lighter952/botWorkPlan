@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 def get_list_of_employees(file_name) -> dict:
+    """Возвращает лист работников из файла в виде словаря(имя, номер строки в таблице"""
     db = xl.readxl(file_name)
     employee_list = dict()
     i = 7
@@ -16,6 +17,8 @@ def get_list_of_employees(file_name) -> dict:
 
 
 def get_plan_by_employee_number(number: list, file_name: str) -> list:
+    """ По заданному номеру работника возвращает лист обьектов его смен """
+
     db = xl.readxl(file_name)
     list_of_days = list()
     i = 3

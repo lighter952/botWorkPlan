@@ -1,1 +1,3 @@
+telegram
 pylightxl~=1.61
+aiogram
